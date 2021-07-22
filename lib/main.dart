@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import './transaction.dart';
+import 'models/transaction.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Flutter App', home: MyHomePage());
+    return MaterialApp(
+      title: 'Flutter App',
+      home: MyHomePage(),
+    );
   }
 }
 
 class MyHomePage extends StatelessWidget {
   final List<Transaction> transactions = [
     Transaction(
-        id: 't001', title: 'New Shoes', amount: 6.99, date: DateTime.now()),
-    Transaction(id: 't002', title: 'Socks', amount: 2.99, date: DateTime.now())
+      id: 't001',
+      title: 'New Shoes',
+      amount: 6.99,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't002',
+      title: 'Socks',
+      amount: 2.99,
+      date: DateTime.now(),
+    ),
   ];
 
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +39,6 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
@@ -34,6 +47,32 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.blue,
                 child: Center(child: Text('Chart!')),
                 elevation: 5,
+              ),
+            ),
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                      controller: titleController,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Ammount'),
+                      controller: amountController,
+                    ),
+                    FlatButton(
+                      onPressed: () => print(titleController.text),
+                      child: Text('Add Transaction'),
+                      textColor: Colors.purple,
+                    )
+                  ],
+                ),
+
+                //TextField()
               ),
             ),
             Column(
